@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="WizardSteps.widget.WizardSteps" needsEntityContext="true" xmlns="http://www.mendix.com/widget/1.0/">
+    <name>WizardSteps</name>
+    <description>Provides an enhanced widget version of the Wizard Steps Header from the Mendix UI Framework pagetemplates.</description>
+
+    <icon>iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAANZJREFUeNpiZCARyMpKKwApByC2B+KHjERqMoBqigdiEHsBEDc+fvz0AQseTQJAqh6IA4BYASp8AYgdgRoPwNSx4LE4AYgL0MQKkTWDABMeA+KxiBmgCzDhCSgDLFLyRBkABPk4xA2INSCAbAOgUaaAwwABaOzgdUE+gWRhQMgAZOcvgGKcBrCgOR+kGeZEQ2CcX4CKTwRS57HFBLoL/JHY/TjYKC5gRAu880hyD6CYARqosID9AE3OF+AGADUnQG0RICFjJgINWcAI1Dwfmu7JAQsAAgwAABkvJKOBD+UAAAAASUVORK5CYII=</icon>
+
+    <properties>
+        <property key="progressStyling" type="boolean" defaultValue="false" required="true">
+            <caption>Progress Wizard</caption>
+            <category>General</category>
+            <description>Use default wizard-progress styling.</description>
+        </property>
+        <property key="layoutMode" type="enumeration" defaultValue="horizontalMode" required="true">
+            <caption>Layout Mode</caption>
+            <category>General</category>
+            <description>Whether to use a horizontal or vertical layout for the steps.</description>
+            <enumerationValues>
+                <enumerationValue key="horizontalMode">Horizontal</enumerationValue>
+                <enumerationValue key="verticalMode">Vertical</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="numberingMode" type="enumeration" defaultValue="autoNumber" required="true">
+            <caption>Numbering</caption>
+            <category>General</category>
+            <description>How to define and show the number of the step.</description>
+            <enumerationValues>
+                <enumerationValue key="autoNumber">Automatic numbering</enumerationValue>
+                <enumerationValue key="sortNumber">Use sorting numbers</enumerationValue>
+                <enumerationValue key="noNumber">Don't show numbering</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="autoWidth" type="boolean" defaultValue="true" required="true">
+            <caption>Full width</caption>
+            <category>General</category>
+            <description>For horizontal layouts. If set to true, all steps have an equal width totalling to full width. If set to false, each step will only take up the space it needs.</description>
+        </property>
+        <property key="navigationMicroflow" type="microflow" required="false" defaultValue="" entityProperty="wizardStep">
+            <caption>Onclick microflow</caption>
+            <category>General</category>
+            <description>The (optional) microflow for when clicking on a wizard step.</description>
+            <returnType type="Boolean"></returnType>
+        </property>
+        <property key="wizardStep" type="entity" required="true">
+             <caption>Wizard step object</caption>
+             <category>Data source</category>
+             <description>The wizard step entity.</description>
+        </property>
+        <property key="dataMode" type="enumeration" defaultValue="microflowDataMode" required="true">
+            <caption>Data source mode</caption>
+            <category>Data source</category>
+            <description>How to collect the wizard steps. Note: xpath and association need a valid context object.</description>
+            <enumerationValues>
+                <enumerationValue key="microflowDataMode">From a microflow</enumerationValue>
+                <enumerationValue key="xpathDataMode">Use an xPath</enumerationValue>
+                <enumerationValue key="associationDataMode">Use associations</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="dataMicroflow" type="microflow" required="false">
+             <caption>Data microflow for steps</caption>
+             <category>Data source</category>
+             <description>Get a list of wizard steps from a microflow.</description>
+             <returnType type="Object" entityProperty="wizardStep" isList="true" />
+        </property>
+        <property key="useDataMicroflowContextObj" type="boolean" required="true" defaultValue="true">
+             <caption>Use context object in Data microflow</caption>
+             <category>Data source</category>
+             <description>Use the context object in the Data microflow for steps</description>
+        </property>
+        <property key="xpath" type="entityConstraint" entityProperty="wizardStep" required="false">
+             <caption>wizard xpath</caption>
+             <category>Data source</category>
+             <description>The xpath that collects all wizard steps from the database. Note: needs a context object.</description>
+        </property>
+        <property key="associatedWizardSteps" type="entity" isPath="optional" pathType="referenceSet" required="false">
+             <caption>wizard step association</caption>
+             <category>Data source</category>
+             <description>Use association for collecting the steps. Note: needs a context object of the total list.</description>
+        </property>
+         <property key="titleAttribute" type="attribute" entityProperty="wizardStep" required="false">
+            <caption>Title</caption>
+            <category>Step definition</category>
+            <description>the title of the step</description>
+            <attributeTypes>
+                <attributeType name="String" />
+            </attributeTypes>
+        </property>
+        <property key="subTitleAttribute" type="attribute" entityProperty="wizardStep" required="false">
+            <caption>Subtitle</caption>
+            <category>Step definition</category>
+            <description>the subtitle of the step</description>
+            <attributeTypes>
+                <attributeType name="String" />
+            </attributeTypes>
+        </property>
+        <property key="statusAttribute" type="attribute" entityProperty="wizardStep">
+            <caption>Status</caption>
+            <category>Step definition</category>
+            <description>The status of the step</description>
+            <attributeTypes>
+                <attributeType name="Enum"/>
+            </attributeTypes>
+        </property>
+        <property key="sortAttribute" type="attribute" entityProperty="wizardStep" required="true">
+            <caption>Sort attribute</caption>
+            <category>Step definition</category>
+            <description>The order in which the steps need to be shown.</description>
+            <attributeTypes>
+                <attributeType name="Integer" />
+            </attributeTypes>
+        </property>
+    </properties>
+</widget>
