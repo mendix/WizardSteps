@@ -46,36 +46,16 @@
              <category>Data source</category>
              <description>The wizard step entity.</description>
         </property>
-        <property key="dataMode" type="enumeration" defaultValue="microflowDataMode" required="true">
-            <caption>Data source mode</caption>
-            <category>Data source</category>
-            <description>How to collect the wizard steps. Note: xpath and association need a valid context object.</description>
-            <enumerationValues>
-                <enumerationValue key="microflowDataMode">From a microflow</enumerationValue>
-                <enumerationValue key="xpathDataMode">Use an xPath</enumerationValue>
-                <enumerationValue key="associationDataMode">Use associations</enumerationValue>
-            </enumerationValues>
-        </property>
-        <property key="dataMicroflow" type="microflow" required="false">
+        <property key="dataMicroflow" type="microflow" required="true">
              <caption>Data microflow for steps</caption>
              <category>Data source</category>
              <description>Get a list of wizard steps from a microflow.</description>
              <returnType type="Object" entityProperty="wizardStep" isList="true" />
         </property>
-        <property key="useDataMicroflowContextObj" type="boolean" required="true" defaultValue="true">
+        <property key="useContextObj" type="boolean" required="true" defaultValue="true">
              <caption>Use context object in Data microflow</caption>
              <category>Data source</category>
              <description>Use the context object in the Data microflow for steps</description>
-        </property>
-        <property key="xpath" type="entityConstraint" entityProperty="wizardStep" required="false">
-             <caption>wizard xpath</caption>
-             <category>Data source</category>
-             <description>The xpath that collects all wizard steps from the database. Note: needs a context object.</description>
-        </property>
-        <property key="associatedWizardSteps" type="entity" isPath="optional" pathType="referenceSet" required="false">
-             <caption>wizard step association</caption>
-             <category>Data source</category>
-             <description>Use association for collecting the steps. Note: needs a context object of the total list.</description>
         </property>
          <property key="titleAttribute" type="attribute" entityProperty="wizardStep" required="false">
             <caption>Title</caption>

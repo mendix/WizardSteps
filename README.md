@@ -34,7 +34,7 @@ The WizardSteps widget will need some modeling work to be done. Basically we nee
 ### Data source
 - Wizard step object: the entity that is the wizard step.
 - Data microflow for steps: the microflow that returns a list of WizardStep objects.
-- Use context object: the wizard doesn't require a context object but it can use one. For conditional steps or returning the context object in the Onclick microflow: set it to true.
+- Use context object: Used for the onClick microflow. If set to false, the contextobject will not be part of the call.
 
 ### Step definition
 - Title
@@ -45,12 +45,13 @@ The WizardSteps widget will need some modeling work to be done. Basically we nee
 ## Notes
 Logic needs to be modeled in Mendix itself with regards to getting to next or previous steps. The Widget itself is very 'dumb' in that way and needs to be. Every step can be clicked, so the intended behaviour will need to be handled in Mendix.
 
-The original foundation version of the WizardSteps widget actually had other datasource options as well such as XPath and by Association to collect these. We've created a separate branch of this version which can be viewed in Github.
+The original foundation version of the WizardSteps widget actually had other datasource options as well such as XPath and by Association to collect these. We've created a separate branch ([original-bloated-version](https://github.com/mendix/WizardSteps/tree/original-bloated-version) of this version which can be viewed in Github.
 
+The latest (but not always appstore ready) version can be found on [github](https://github.com/mendix/WizardSteps)
 ## Compatibility
 The widget was created in Mendix version 5.18 but it should work from 5.14.1 onwards although untested.
 The latest Mendix version it was tested in is version 6.2 so Mendix 6 is compatible.
 
 ## Release Notes
-1.0 release:
-- not done yet
+1.0 appstore release:
+- first appstore version of the widget

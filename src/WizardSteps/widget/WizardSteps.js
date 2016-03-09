@@ -5,7 +5,7 @@
     @file      : WizardSteps.js
     @version   : 1.0.0
     @author    : Willem Gorisse
-    @date      : 08/03/2016
+    @date      : 09/03/2016
     @copyright : Mendix 2016
     @license   : Apache 2
 
@@ -51,24 +51,16 @@ define([
         
         constructor: function(data) {
             this._data = data;
-            //Question how to deal with ${var} that is undefined? 
             if (!this._data.title || this._data.title === undefined){
                this._data.title = "";     
             }
             if (!this._data.subTitle || this._data.subTitle === undefined){
                this._data.subTitle = "";     
             }
-            //dom('div', {id:"bla"}, $("span", "de tekst"));   // kan domnodes zijn, string, fragments */ 
-           //  dom("#", .... ) is een fragment */ 
         },
         
         postCreate: function() {           
             this._updateRendering();
-        },
-
-        // mxui.widget._WidgetBase.uninitialize is called when the widget is destroyed. Implement to do special tear-down work.
-        uninitialize: function() {
-            // Clean up listeners, helper objects, etc. There is no need to remove listeners added with this.connect / this.subscribe / this.own.
         },
         
         _updateRendering: function() {
@@ -110,12 +102,9 @@ define([
         layoutMode: null,
         numberingMode: null,
 
-        dataMode: null,
         navigationMicroflow: null,
         dataMicroflow: null,
-        useDataMicroflowContextObj: null,
-        xpath: null,
-        associatedWizardSteps: null,
+        useContextObj: null,
 
         // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
         _contextObj: null,
@@ -144,20 +133,6 @@ define([
             this._getData(callback);
         },
 
-        // mxui.widget._WidgetBase.enable is called when the widget should enable editing. Implement to enable editing if widget is input widget.
-        enable: function() {},
-
-        // mxui.widget._WidgetBase.enable is called when the widget should disable editing. Implement to disable editing if widget is input widget.
-        disable: function() {},
-
-        // mxui.widget._WidgetBase.resize is called when the page's layout is recalculated. Implement to do sizing calculations. Prefer using CSS instead.
-        resize: function(box) {},
-
-        // mxui.widget._WidgetBase.uninitialize is called when the widget is destroyed. Implement to do special tear-down work.
-        uninitialize: function() {
-            // Clean up listeners, helper objects, etc. There is no need to remove listeners added with this.connect / this.subscribe / this.own.
-        },
-
         // We want to stop events on a mobile device
         _stopBubblingEventOnMobile: function(e) {
             if (typeof document.ontouchstart !== "undefined") {
@@ -179,45 +154,23 @@ define([
             }
 
             // get new data
-            switch (this.dataMode) {
-                case "xpathDataMode":
-                    if (this._contextObj && this.xpath) {
-                        var newxPath = "//" + this.wizardStep + this.xpath.replace(/\[%CurrentObject%\]/g, this._contextObj.getGuid());
-                        mx.data.get({
-                            xpath:newxPath,
-                            filter: {
-                                sort: [[this.sortAttribute, "asc"]]
-                            },
-                            
-                            callback: receivedData
-                        },this);
-                    }
-                    break;
-                case "associationDataMode":
-                    if (this._contextObj && this.associatedWizardSteps) {
-                        this._contextObj.fetch(this.associatedWizardSteps, dojoLang.hitch(this,receivedData));
-                    }
-                    break;
-                case "microflowDataMode":
-                default:
-                    if (this.dataMicroflow) {
-                        // if a contextObj is present, pass it to the microflow
-                        var dataGuids = [];
-                        var dataSelection = "none";
-                        if (this.useDataMicroflowContextObj && this._contextObj) {
-                            dataGuids = [this._contextObj.getGuid()];
-                            dataSelection = "selection";
-                        }
-                        mx.data.action({
-                            params: {
-                                actionname: this.dataMicroflow,
-                                applyto: dataSelection,
-                                guids: dataGuids
-                            },
-                            callback: dojoLang.hitch(this,receivedData)
-                        },this);
-                       
-                    }
+             if (this.dataMicroflow) {
+                // if a contextObj is present, pass it to the microflow
+                var dataGuids = [];
+                var dataSelection = "none";
+                if (this.useContextObj && this._contextObj) {
+                    dataGuids = [this._contextObj.getGuid()];
+                    dataSelection = "selection";
+                }
+                mx.data.action({
+                    params: {
+                        actionname: this.dataMicroflow,
+                        applyto: dataSelection,
+                        guids: dataGuids
+                    },
+                    callback: dojoLang.hitch(this,receivedData)
+                },this);
+               
             }
         },
         
