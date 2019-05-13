@@ -41,7 +41,7 @@
             <description>The (optional) microflow for when clicking on a wizard step.</description>
             <returnType type="Boolean"></returnType>
         </property>
-        <property key="wizardStep" type="entity" required="true">
+        <property key="wizardStep" type="entity" required="true" allowNonPersistableEntities="true">
              <caption>Wizard step object</caption>
              <category>Data source</category>
              <description>The wizard step entity.</description>
