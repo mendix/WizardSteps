@@ -1,0 +1,10 @@
+{
+  "generator-mendix": {
+    "promptValues": {
+      "copyright": "Mendix 2018",
+      "license": "Apache 2",
+      "author": "Willem Gorisse",
+      "boilerplate": "appstore"
+    }
+  }
+}
