@@ -67,7 +67,7 @@ The latest (but not always appstore ready) version can be found on [github](http
 ## Compatibility
 
 The widget was created in Mendix version 5.18 but it should work from 5.14.1 onwards although untested.
-The latest Mendix version it was tested in is version 6.2 so Mendix 6 is compatible.
+The latest Mendix version tested was 9.3.
 
 ## Release Notes
 

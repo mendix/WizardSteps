@@ -22,3 +22,4 @@ node_modules/
 *.sublime*
 Gruntfile.js
 package.json
+dist
